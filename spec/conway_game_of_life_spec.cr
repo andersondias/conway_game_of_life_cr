@@ -2,7 +2,7 @@ require "./spec_helper"
 
 describe ConwayGameOfLife do
   context "respects first law: any live cell with fewer than two live neighbours dies, as if caused by under-population" do
-    before_each do
+    Spec.before_each do
       @population = Population.new
     end
 
