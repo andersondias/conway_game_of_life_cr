@@ -1,0 +1,7 @@
+name: conway_game_of_life
+version: 0.1.0
+
+authors:
+  - Anderson Dias <andersondaraujo@gmail.com>
+
+license: MIT
