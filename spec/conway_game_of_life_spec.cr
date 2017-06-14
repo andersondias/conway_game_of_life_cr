@@ -8,5 +8,15 @@ describe ConwayGameOfLife do
         cell.dead?.should be_truthy
       end
     end
+
+    context "cell with one live neighbour" do
+      it "should be dead" do
+        cell = ConwayGameOfLife::Cell.new
+        neighbour_cell = ConwayGameOfLife::Cell.new
+
+        cell.dead?.should be_truthy
+        neighbour_cell.dead?.should be_truthy
+      end
+    end
   end
 end
