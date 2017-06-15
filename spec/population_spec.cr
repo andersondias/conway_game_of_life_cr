@@ -12,10 +12,10 @@ describe ConwayGameOfLife::Population do
     it "adds cells to population" do
       population = ConwayGameOfLife::Population.new
 
-      cell = ConwayGameOfLife::Cell.new
+      cell = ConwayGameOfLife::Cell.new(alive: false)
       population.add_cell(cell, x: 0, y: 0)
 
-      another_cell = ConwayGameOfLife::Cell.new
+      another_cell = ConwayGameOfLife::Cell.new(alive: false)
       population.add_cell(another_cell, x: 0, y: 1)
 
       population.cells.size.should eq 2
@@ -28,10 +28,10 @@ describe ConwayGameOfLife::Population do
     it "kills all its cells" do
       population = ConwayGameOfLife::Population.new
 
-      cell = ConwayGameOfLife::Cell.new
+      cell = ConwayGameOfLife::Cell.new(alive: true)
       population.add_cell(cell, x: 0, y: 0)
 
-      another_cell = ConwayGameOfLife::Cell.new
+      another_cell = ConwayGameOfLife::Cell.new(alive: true)
       population.add_cell(another_cell, x: 0, y: 1)
 
       cell.dead?.should be_false

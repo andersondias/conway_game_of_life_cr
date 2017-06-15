@@ -5,8 +5,7 @@ describe ConwayGameOfLife do
     context "cell with no live neighbours" do
       it "should be dead in the next generation" do
         population = ConwayGameOfLife::Population.new
-        cell = ConwayGameOfLife::Cell.new
-        cell.alive!
+        cell = ConwayGameOfLife::Cell.new(alive: true)
 
         cell.dead?.should be_falsey
 
@@ -20,11 +19,8 @@ describe ConwayGameOfLife do
     context "cell with one live neighbour" do
       it "should be dead in the next generation" do
         population = ConwayGameOfLife::Population.new
-        cell = ConwayGameOfLife::Cell.new
-        cell.alive!
-
-        another_cell = ConwayGameOfLife::Cell.new
-        another_cell.alive!
+        cell = ConwayGameOfLife::Cell.new(alive: true)
+        another_cell = ConwayGameOfLife::Cell.new(alive: true)
 
         cell.dead?.should be_falsey
         another_cell.dead?.should be_falsey
