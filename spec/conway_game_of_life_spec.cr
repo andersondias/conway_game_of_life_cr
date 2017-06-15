@@ -2,7 +2,7 @@ require "./spec_helper"
 
 describe ConwayGameOfLife do
   context "respects first law: any live cell with fewer than two live neighbours dies, as if caused by under-population" do
-    context "cell with no live neighbours" do
+    context "live cell with no live neighbours" do
       it "should be dead in the next generation" do
         population = ConwayGameOfLife::Population.new(length: 2, width: 2)
 
@@ -15,7 +15,7 @@ describe ConwayGameOfLife do
       end
     end
 
-    context "cell with one live neighbour" do
+    context "live cell with one live neighbour" do
       it "should be dead in the next generation" do
         population = ConwayGameOfLife::Population.new(length: 3, width: 3)
 
@@ -34,7 +34,7 @@ describe ConwayGameOfLife do
   end
 
   context "respects second law: any live cell with two or three live neighbours lives on to the next generation" do
-    context "cell with two live neighbours at left and right sides" do
+    context "live cell with two live neighbours at left and right sides" do
       it "should be alive in the next generation" do
         population = ConwayGameOfLife::Population.new(length: 5, width: 5)
 
@@ -55,7 +55,7 @@ describe ConwayGameOfLife do
       end
     end
 
-    context "cell with two live neighbours at top and botton sides" do
+    context "live cell with two live neighbours at top and botton sides" do
       it "should be alive in the next generation" do
         population = ConwayGameOfLife::Population.new(length: 5, width: 5)
 
@@ -76,7 +76,7 @@ describe ConwayGameOfLife do
       end
     end
 
-    context "cell with two live neighbours at left and top sides" do
+    context "live cell with two live neighbours at left and top sides" do
       it "should be alive in the next generation" do
         population = ConwayGameOfLife::Population.new(length: 5, width: 5)
 
@@ -97,7 +97,7 @@ describe ConwayGameOfLife do
       end
     end
 
-    context "cell with two live neighbours at right and top sides" do
+    context "live cell with two live neighbours at right and top sides" do
       it "should be alive in the next generation" do
         population = ConwayGameOfLife::Population.new(length: 5, width: 5)
 
@@ -119,7 +119,7 @@ describe ConwayGameOfLife do
     end
 
 
-    context "cell with two live neighbours at left and bottom sides" do
+    context "live cell with two live neighbours at left and bottom sides" do
       it "should be alive in the next generation" do
         population = ConwayGameOfLife::Population.new(length: 5, width: 5)
 
@@ -140,7 +140,7 @@ describe ConwayGameOfLife do
       end
     end
 
-    context "cell with two live neighbours at right and bottom sides" do
+    context "live cell with two live neighbours at right and bottom sides" do
       it "should be alive in the next generation" do
         population = ConwayGameOfLife::Population.new(length: 5, width: 5)
 
