@@ -3,6 +3,9 @@ class ConwayGameOfLife::Cell
     true
   end
 
+  def dead!
+  end
+
   def alive!
   end
 end
