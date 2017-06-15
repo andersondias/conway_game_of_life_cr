@@ -1,6 +1,9 @@
 class ConwayGameOfLife::Population
-  def initialize
+  def initialize(width, length)
     @cells = Array(ConwayGameOfLife::Cell).new
+    (width * length).times do
+      @cells << ConwayGameOfLife::Cell.new(alive: false)
+    end
   end
 
   def add_cell(cell : ConwayGameOfLife::Cell, x, y)

@@ -2,15 +2,17 @@ require "./spec_helper"
 
 describe ConwayGameOfLife::Population do
   describe "#cells" do
-    it "starts with an empty list of cells" do
-      population = ConwayGameOfLife::Population.new
-      population.cells.empty?.should be_true
+    it "starts with a dead list of cells" do
+      population = ConwayGameOfLife::Population.new(width: 2, length: 2)
+      population.cells.size.should eq 4
+      all_cells_are_dead = population.cells.all? { |cell| cell.dead? }
+      all_cells_are_dead.should be_true
     end
   end
 
   describe "#add_cell" do
     it "adds cells to population" do
-      population = ConwayGameOfLife::Population.new
+      population = ConwayGameOfLife::Population.new(width: 2, length: 2)
 
       cell = ConwayGameOfLife::Cell.new(alive: false)
       population.add_cell(cell, x: 0, y: 0)
@@ -26,7 +28,7 @@ describe ConwayGameOfLife::Population do
 
   describe "#next_generation!" do
     it "kills all its cells" do
-      population = ConwayGameOfLife::Population.new
+      population = ConwayGameOfLife::Population.new(width: 2, length: 2)
 
       cell = ConwayGameOfLife::Cell.new(alive: true)
       population.add_cell(cell, x: 0, y: 0)

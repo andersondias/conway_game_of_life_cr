@@ -4,7 +4,7 @@ describe ConwayGameOfLife do
   context "respects first law: any live cell with fewer than two live neighbours dies, as if caused by under-population" do
     context "cell with no live neighbours" do
       it "should be dead in the next generation" do
-        population = ConwayGameOfLife::Population.new
+        population = ConwayGameOfLife::Population.new(length: 2, width: 2)
         lonely_cell = ConwayGameOfLife::Cell.new(alive: true)
 
         population.add_cell(lonely_cell, x: 0, y: 0)
@@ -16,7 +16,7 @@ describe ConwayGameOfLife do
 
     context "cell with one live neighbour" do
       it "should be dead in the next generation" do
-        population = ConwayGameOfLife::Population.new
+        population = ConwayGameOfLife::Population.new(length: 3, width: 3)
         cell = ConwayGameOfLife::Cell.new(alive: true)
         neighbour_cell = ConwayGameOfLife::Cell.new(alive: true)
 
@@ -33,7 +33,7 @@ describe ConwayGameOfLife do
   context "respects second law: any live cell with two or three live neighbours lives on to the next generation" do
     context "cell with two live neighbours" do
       it "should be alive in the next generation" do
-        population = ConwayGameOfLife::Population.new
+        population = ConwayGameOfLife::Population.new(length: 5, width: 5)
         cell = ConwayGameOfLife::Cell.new(alive: true)
         population.add_cell(cell, x: 2, y: 2)
 
