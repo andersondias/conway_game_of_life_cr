@@ -12,5 +12,6 @@ class ConwayGameOfLife::Population
   end
 
   def next_generation!
+    @cells.each do |cell| cell.dead! end
   end
 end
