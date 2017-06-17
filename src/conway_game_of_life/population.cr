@@ -54,12 +54,12 @@ class ConwayGameOfLife::Population
 
         alive_cells_around_current_cell += 1 if cell_to_the_left.alive?
         alive_cells_around_current_cell += 1 if cell_to_the_right.alive?
-        alive_cells_around_current_cell += 1 if cell_to_the_top && cell_to_the_top.alive?
-        alive_cells_around_current_cell += 1 if cell_to_the_bottom && cell_to_the_bottom.alive?
-        alive_cells_around_current_cell += 1 if cell_to_the_bottom_left && cell_to_the_bottom_left.alive?
-        alive_cells_around_current_cell += 1 if cell_to_the_bottom_right && cell_to_the_bottom_right.alive?
-        alive_cells_around_current_cell += 1 if cell_to_the_top_left && cell_to_the_top_left.alive?
-        alive_cells_around_current_cell += 1 if cell_to_the_top_right && cell_to_the_top_right.alive?
+        alive_cells_around_current_cell += 1 if cell_to_the_top.try(&.alive?)
+        alive_cells_around_current_cell += 1 if cell_to_the_top_left.try(&.alive?)
+        alive_cells_around_current_cell += 1 if cell_to_the_top_right.try(&.alive?)
+        alive_cells_around_current_cell += 1 if cell_to_the_bottom.try(&.alive?)
+        alive_cells_around_current_cell += 1 if cell_to_the_bottom_left.try(&.alive?)
+        alive_cells_around_current_cell += 1 if cell_to_the_bottom_right.try(&.alive?)
 
         if alive_cells_around_current_cell < 2
           about_to_die << current_cell
@@ -67,6 +67,6 @@ class ConwayGameOfLife::Population
       end
     end
 
-    about_to_die.each { |cell| cell.dead! }
+    about_to_die.each(&.dead!)
   end
 end
