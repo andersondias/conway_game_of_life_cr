@@ -30,15 +30,24 @@ class ConwayGameOfLife::Population
         current_cell = @cells[x][y]
         next if current_cell.dead?
 
-        cell_to_the_left = @cells[x-1][y]
-        cell_to_the_right = @cells[x+1][y]
+        left = x - 1
+        right = x + 1
+        top = y - 1
+        bottom = y + 1
+
+        cell_to_the_left = @cells[left][y]
+        cell_to_the_right = @cells[right][y]
 
         if y > 0
-          cell_to_the_top = @cells[x][y-1]
+          cell_to_the_top = @cells[x][top]
+          cell_to_the_top_left = @cells[left][top]
+          cell_to_the_top_right = @cells[right][top]
         end
 
         if y + 1 < @length
-          cell_to_the_botton = @cells[x][y+1]
+          cell_to_the_bottom = @cells[x][bottom]
+          cell_to_the_bottom_left = @cells[left][bottom]
+          cell_to_the_bottom_right = @cells[right][bottom]
         end
 
         alive_cells_around_current_cell = 0
@@ -46,7 +55,11 @@ class ConwayGameOfLife::Population
         alive_cells_around_current_cell += 1 if cell_to_the_left.alive?
         alive_cells_around_current_cell += 1 if cell_to_the_right.alive?
         alive_cells_around_current_cell += 1 if cell_to_the_top && cell_to_the_top.alive?
-        alive_cells_around_current_cell += 1 if cell_to_the_botton && cell_to_the_botton.alive?
+        alive_cells_around_current_cell += 1 if cell_to_the_bottom && cell_to_the_bottom.alive?
+        alive_cells_around_current_cell += 1 if cell_to_the_bottom_left && cell_to_the_bottom_left.alive?
+        alive_cells_around_current_cell += 1 if cell_to_the_bottom_right && cell_to_the_bottom_right.alive?
+        alive_cells_around_current_cell += 1 if cell_to_the_top_left && cell_to_the_top_left.alive?
+        alive_cells_around_current_cell += 1 if cell_to_the_top_right && cell_to_the_top_right.alive?
 
         if alive_cells_around_current_cell < 2
           about_to_die << current_cell

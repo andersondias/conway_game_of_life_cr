@@ -92,8 +92,8 @@ describe ConwayGameOfLife do
         population.next_generation!
 
         cell.alive?.should be_true
-        cell_at_top.dead?.should be_true
-        cell_at_left.dead?.should be_true
+        cell_at_top.alive?.should be_true
+        cell_at_left.alive?.should be_true
       end
     end
 
@@ -113,8 +113,8 @@ describe ConwayGameOfLife do
         population.next_generation!
 
         cell.alive?.should be_true
-        cell_at_top.dead?.should be_true
-        cell_at_right.dead?.should be_true
+        cell_at_top.alive?.should be_true
+        cell_at_right.alive?.should be_true
       end
     end
 
@@ -135,8 +135,8 @@ describe ConwayGameOfLife do
         population.next_generation!
 
         cell.alive?.should be_true
-        cell_at_bottom.dead?.should be_true
-        cell_at_left.dead?.should be_true
+        cell_at_bottom.alive?.should be_true
+        cell_at_left.alive?.should be_true
       end
     end
 
@@ -151,6 +151,27 @@ describe ConwayGameOfLife do
         cell_at_bottom.alive!
 
         cell_at_right = population.find_cell(x: 3, y: 2)
+        cell_at_right.alive!
+
+        population.next_generation!
+
+        cell.alive?.should be_true
+        cell_at_bottom.alive?.should be_true
+        cell_at_right.alive?.should be_true
+      end
+    end
+
+    context "live cell with two live neighbours at top-right and bottom-left sides" do
+      it "should be alive in the next generation" do
+        population = ConwayGameOfLife::Population.new(length: 5, width: 5)
+
+        cell = population.find_cell(x: 2, y: 2)
+        cell.alive!
+
+        cell_at_bottom = population.find_cell(x: 1, y: 3)
+        cell_at_bottom.alive!
+
+        cell_at_right = population.find_cell(x: 3, y: 1)
         cell_at_right.alive!
 
         population.next_generation!
