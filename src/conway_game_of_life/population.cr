@@ -30,36 +30,8 @@ class ConwayGameOfLife::Population
         current_cell = @cells[x][y]
         next if current_cell.dead?
 
-        left = x - 1
-        right = x + 1
-        top = y - 1
-        bottom = y + 1
-
-        cell_to_the_left = @cells[left][y]
-        cell_to_the_right = @cells[right][y]
-
-        if y > 0
-          cell_to_the_top = @cells[x][top]
-          cell_to_the_top_left = @cells[left][top]
-          cell_to_the_top_right = @cells[right][top]
-        end
-
-        if y + 1 < @length
-          cell_to_the_bottom = @cells[x][bottom]
-          cell_to_the_bottom_left = @cells[left][bottom]
-          cell_to_the_bottom_right = @cells[right][bottom]
-        end
-
-        alive_cells_around_current_cell = 0
-
-        alive_cells_around_current_cell += 1 if cell_to_the_left.alive?
-        alive_cells_around_current_cell += 1 if cell_to_the_right.alive?
-        alive_cells_around_current_cell += 1 if cell_to_the_top.try(&.alive?)
-        alive_cells_around_current_cell += 1 if cell_to_the_top_left.try(&.alive?)
-        alive_cells_around_current_cell += 1 if cell_to_the_top_right.try(&.alive?)
-        alive_cells_around_current_cell += 1 if cell_to_the_bottom.try(&.alive?)
-        alive_cells_around_current_cell += 1 if cell_to_the_bottom_left.try(&.alive?)
-        alive_cells_around_current_cell += 1 if cell_to_the_bottom_right.try(&.alive?)
+        neighbourhood = neighbourhood(x, y)
+        alive_cells_around_current_cell = neighbourhood.compact.select(&.alive?).size
 
         if alive_cells_around_current_cell < 2
           about_to_die << current_cell
@@ -68,5 +40,31 @@ class ConwayGameOfLife::Population
     end
 
     about_to_die.each(&.dead!)
+  end
+
+  def neighbourhood(x, y)
+    left = x - 1
+    right = x + 1
+    top = y - 1
+    bottom = y + 1
+
+    neighbourhood = Array(ConwayGameOfLife::Cell).new
+
+    neighbourhood << @cells[left][y]
+    neighbourhood << @cells[right][y]
+
+    if y > 0
+      neighbourhood << @cells[x][top]
+      neighbourhood << @cells[left][top]
+      neighbourhood << @cells[right][top]
+    end
+
+    if y + 1 < @length
+      neighbourhood << @cells[x][bottom]
+      neighbourhood << @cells[left][bottom]
+      neighbourhood << @cells[right][bottom]
+    end
+
+    neighbourhood
   end
 end
