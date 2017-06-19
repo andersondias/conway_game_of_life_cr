@@ -14,6 +14,10 @@ class ConwayGameOfLife::Population
     @cells[x][y]
   end
 
+  def cells_matrix
+    @cells
+  end
+
   def cells
     @cells.flatten
   end
@@ -22,16 +26,24 @@ class ConwayGameOfLife::Population
     cells.size
   end
 
+  def width
+    @width
+  end
+
+  def length
+    @length
+  end
+
   def next_generation!
     about_to_die = Array(ConwayGameOfLife::Cell).new
 
-    @width.times do |x|
-      @length.times do |y|
+    width.times do |x|
+      length.times do |y|
         current_cell = @cells[x][y]
         next if current_cell.dead?
 
-        neighbourhood = neighbourhood(x, y)
-        alive_cells_around_current_cell = neighbourhood.compact.select(&.alive?).size
+        neighborhood = ConwayGameOfLife::Neighborhood.new(self, x, y)
+        alive_cells_around_current_cell = neighborhood.alive.size
 
         if alive_cells_around_current_cell < 2
           about_to_die << current_cell
@@ -40,31 +52,5 @@ class ConwayGameOfLife::Population
     end
 
     about_to_die.each(&.dead!)
-  end
-
-  def neighbourhood(x, y)
-    left = x - 1
-    right = x + 1
-    top = y - 1
-    bottom = y + 1
-
-    neighbourhood = Array(ConwayGameOfLife::Cell).new
-
-    neighbourhood << @cells[left][y]
-    neighbourhood << @cells[right][y]
-
-    if y > 0
-      neighbourhood << @cells[x][top]
-      neighbourhood << @cells[left][top]
-      neighbourhood << @cells[right][top]
-    end
-
-    if y + 1 < @length
-      neighbourhood << @cells[x][bottom]
-      neighbourhood << @cells[left][bottom]
-      neighbourhood << @cells[right][bottom]
-    end
-
-    neighbourhood
   end
 end
