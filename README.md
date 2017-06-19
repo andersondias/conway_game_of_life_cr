@@ -44,8 +44,11 @@ This code has been fully tested TDD. To run specs execute on terminal:
   crystal spec
   ```
 
-To do
------
+Running
+-------
 
-- Create a seeder class
-- Create an interface to run in terminal, so you can see it working live :)
+I provide a basic terminal client interface to the game. It generates a 10 x 10 population with random alive cells and prints the next generation when you press ENTER.
+
+  ```bash
+  crystal run src/main.cr
+  ```
