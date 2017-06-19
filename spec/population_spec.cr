@@ -11,6 +11,20 @@ describe ConwayGameOfLife::Population do
     end
   end
 
+  describe "#length" do
+    it "returns the given length" do
+      population = ConwayGameOfLife::Population.new(width: 2, length: 4)
+      population.length.should eq 4
+    end
+  end
+
+  describe "#width" do
+    it "returns the given width" do
+      population = ConwayGameOfLife::Population.new(width: 2, length: 4)
+      population.width.should eq 2
+    end
+  end
+
   describe "#size" do
     it "is based the product of population's width times it's length" do
       population = ConwayGameOfLife::Population.new(width: 1, length: 1)
@@ -21,6 +35,23 @@ describe ConwayGameOfLife::Population do
 
       population = ConwayGameOfLife::Population.new(width: 2, length: 3)
       population.size.should eq 6
+    end
+  end
+
+  describe "#cells_matrix" do
+    it "returns cells in bidimensional matrix" do
+      population = ConwayGameOfLife::Population.new(width: 2, length: 3)
+      matrix = population.cells_matrix
+
+      matrix.size.should eq 2
+      matrix.first.size.should eq 3
+
+      matrix[0][0].should eq population.cells[0]
+      matrix[0][1].should eq population.cells[1]
+      matrix[0][2].should eq population.cells[2]
+      matrix[1][0].should eq population.cells[3]
+      matrix[1][1].should eq population.cells[4]
+      matrix[1][2].should eq population.cells[5]
     end
   end
 
