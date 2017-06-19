@@ -237,4 +237,37 @@ describe ConwayGameOfLife do
       end
     end
   end
+
+  context "respects fourth law: any dead cell with exactly three live neighbours becomes a live cell, as if by reproduction" do
+    context "dead cell with exactly three live neighbours" do
+      it "should be alive in the next generation" do
+        population = ConwayGameOfLife::Population.new(length: 5, width: 5)
+
+        cell = population.find_cell(x: 2, y: 3)
+        cell.alive!
+
+        cell_at_top = population.find_cell(x: 2, y: 2)
+        cell_at_top.alive!
+
+        cell_at_left = population.find_cell(x: 1, y: 3)
+        cell_at_left.alive!
+
+        cell_at_right = population.find_cell(x: 3, y: 3)
+        cell_at_right.alive!
+
+        cell_at_right_bottom = population.find_cell(x: 3, y: 4)
+        cell_at_right_bottom.alive!
+
+        cell_at_bottom = population.find_cell(x: 2, y: 4)
+        cell_at_top_left = population.find_cell(x: 1, y: 2)
+        cell_at_top_right = population.find_cell(x: 3, y: 2)
+
+        population.next_generation!
+
+        cell_at_bottom.dead?.should be_true
+        cell_at_top_left.alive?.should be_true
+        cell_at_top_right.alive?.should be_true
+      end
+    end
+  end
 end
