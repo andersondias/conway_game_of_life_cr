@@ -43,7 +43,7 @@ class ConwayGameOfLife::Population
         next if current_cell.dead?
 
         neighborhood = ConwayGameOfLife::Neighborhood.new(self, x, y)
-        alive_cells_around_current_cell = neighborhood.alive.size
+        alive_cells_around_current_cell = neighborhood.alive
 
         if alive_cells_around_current_cell < 2
           about_to_die << current_cell
