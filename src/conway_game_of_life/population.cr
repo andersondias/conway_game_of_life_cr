@@ -45,7 +45,7 @@ class ConwayGameOfLife::Population
         neighborhood = ConwayGameOfLife::Neighborhood.new(self, x, y)
         alive_cells_around_current_cell = neighborhood.alive
 
-        if alive_cells_around_current_cell < 2
+        if alive_cells_around_current_cell < 2 || alive_cells_around_current_cell > 3
           about_to_die << current_cell
         end
       end

@@ -206,4 +206,35 @@ describe ConwayGameOfLife do
       end
     end
   end
+
+  context "respects third law: any live cell with more than three live neighbours dies in the next generation, as if by overcrowding" do
+    context "live cell with more than three live neighbours" do
+      it "should be dead in the next generation" do
+        population = ConwayGameOfLife::Population.new(length: 5, width: 5)
+
+        cell = population.find_cell(x: 2, y: 3)
+        cell.alive!
+
+        cell_at_top = population.find_cell(x: 2, y: 2)
+        cell_at_top.alive!
+
+        cell_at_left = population.find_cell(x: 1, y: 3)
+        cell_at_left.alive!
+
+        cell_at_right = population.find_cell(x: 3, y: 3)
+        cell_at_right.alive!
+
+        cell_at_right_bottom = population.find_cell(x: 3, y: 4)
+        cell_at_right_bottom.alive!
+
+        population.next_generation!
+
+        cell.dead?.should be_true
+        cell_at_top.alive?.should be_true
+        cell_at_left.alive?.should be_true
+        cell_at_right.alive?.should be_true
+        cell_at_right_bottom.alive?.should be_true
+      end
+    end
+  end
 end
