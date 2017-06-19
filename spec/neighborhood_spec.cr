@@ -17,6 +17,46 @@ describe ConwayGameOfLife::Neighborhood do
       neighborhood[6].should eq population.find_cell(x: 2, y: 2)
       neighborhood[7].should eq population.find_cell(x: 3, y: 2)
     end
+
+    it "considers an infinite world" do
+      population = ConwayGameOfLife::Population.new(width: 4, length: 3)
+
+      neighborhood = ConwayGameOfLife::Neighborhood.new(population, x: 0, y: 0).all
+      neighborhood.size.should eq 8
+
+      neighborhood[0].should eq population.find_cell(x: 3, y: 2)
+      neighborhood[1].should eq population.find_cell(x: 0, y: 2)
+      neighborhood[2].should eq population.find_cell(x: 1, y: 2)
+      neighborhood[3].should eq population.find_cell(x: 3, y: 0)
+      neighborhood[4].should eq population.find_cell(x: 1, y: 0)
+      neighborhood[5].should eq population.find_cell(x: 3, y: 1)
+      neighborhood[6].should eq population.find_cell(x: 0, y: 1)
+      neighborhood[7].should eq population.find_cell(x: 1, y: 1)
+
+      neighborhood = ConwayGameOfLife::Neighborhood.new(population, x: 3, y: 2).all
+      neighborhood.size.should eq 8
+
+      neighborhood[0].should eq population.find_cell(x: 2, y: 1)
+      neighborhood[1].should eq population.find_cell(x: 3, y: 1)
+      neighborhood[2].should eq population.find_cell(x: 0, y: 1)
+      neighborhood[3].should eq population.find_cell(x: 2, y: 2)
+      neighborhood[4].should eq population.find_cell(x: 0, y: 2)
+      neighborhood[5].should eq population.find_cell(x: 2, y: 0)
+      neighborhood[6].should eq population.find_cell(x: 3, y: 0)
+      neighborhood[7].should eq population.find_cell(x: 0, y: 0)
+
+      neighborhood = ConwayGameOfLife::Neighborhood.new(population, x: 0, y: 2).all
+      neighborhood.size.should eq 8
+
+      neighborhood[0].should eq population.find_cell(x: 3, y: 1)
+      neighborhood[1].should eq population.find_cell(x: 0, y: 1)
+      neighborhood[2].should eq population.find_cell(x: 1, y: 1)
+      neighborhood[3].should eq population.find_cell(x: 3, y: 2)
+      neighborhood[4].should eq population.find_cell(x: 1, y: 2)
+      neighborhood[5].should eq population.find_cell(x: 3, y: 0)
+      neighborhood[6].should eq population.find_cell(x: 0, y: 0)
+      neighborhood[7].should eq population.find_cell(x: 1, y: 0)
+    end
   end
 
   describe "#alive" do

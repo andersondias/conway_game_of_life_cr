@@ -9,30 +9,26 @@ class ConwayGameOfLife::Neighborhood
     @cells = population.cells_matrix
 
     @left = @x - 1
-    @right = @x + 1
+    @right = @x + 1 == population.width ? 0 : @x + 1
     @top = @y - 1
-    @bottom = @y + 1
+    @bottom = @y + 1 == population.length ? 0 : @y + 1
   end
 
   def all
     neighborhood = Array(ConwayGameOfLife::Cell).new
 
-    if @y > 0
-      neighborhood << @cells[@left][@top]
-      neighborhood << @cells[@x][@top]
-      neighborhood << @cells[@right][@top]
-    end
+    neighborhood << @cells[@left][@top]
+    neighborhood << @cells[@x][@top]
+    neighborhood << @cells[@right][@top]
 
     neighborhood << @cells[@left][@y]
     neighborhood << @cells[@right][@y]
 
-    if @y + 1 < @population.length
-      neighborhood << @cells[@left][@bottom]
-      neighborhood << @cells[@x][@bottom]
-      neighborhood << @cells[@right][@bottom]
-    end
+    neighborhood << @cells[@left][@bottom]
+    neighborhood << @cells[@x][@bottom]
+    neighborhood << @cells[@right][@bottom]
 
-    neighborhood
+    neighborhood.uniq
   end
 
   def alive
