@@ -25,6 +25,16 @@ The code
 
 This is a Crystal implementation of Conway's Game of Life.
 
+The idea was to use this challenge to learn Crystal.
+
+Every commit will add more complexity to the implementation and I've noted everything I've learned in the commit messages, so anyone can see how it has evolved.
+
+Dependencies
+------------
+
+In order to run the project you must install Crystal: https://crystal-lang.org/docs/installation/.
+
+
 Specs
 -----
 
@@ -33,3 +43,9 @@ This code has been fully tested TDD. To run specs execute on terminal:
   ```bash
   crystal spec
   ```
+
+To do
+-----
+
+- Create a seeder class
+- Create an interface to run in terminal, so you can see it working live :)
